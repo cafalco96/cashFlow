@@ -1,19 +1,23 @@
 <template>
   <div class="cash-flow-layout">
     <slot name="header"></slot>
-    <div class="cash-flow-layout--resume">
-      <slot name="frontcontent"></slot>
-    </div>
-    <div class="cash-flow-layout--moviments-container">
-      <div
-        class="cash-flow-layout--moviments-container--header"
-        @click="showMovements = !showMovements"
-      >
-        <div class="cash-flow-layout--moviments-container--header__grip"></div>
-        <h2>Record</h2>
+    <div class="cash-flow-layout--container">
+      <div class="cash-flow-layout--resume">
+        <slot name="frontcontent"></slot>
       </div>
-      <div class="cash-flow-layout--moviments-content" v-show="showMovements">
-        <slot name="movimentsComponent"></slot>
+      <div class="cash-flow-layout--moviments-container">
+        <div
+          class="cash-flow-layout--moviments-container--header"
+          @click="showMovements = !showMovements"
+        >
+          <div
+            class="cash-flow-layout--moviments-container--header__grip"
+          ></div>
+          <h2>Record</h2>
+        </div>
+        <div class="cash-flow-layout--moviments-content" v-show="showMovements">
+          <slot name="movimentsComponent"></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -24,6 +28,7 @@ const showMovements = ref(false);
 </script>
 <style lang="scss">
 .cash-flow-layout {
+  box-sizing: border-box;
   &--header {
     display: flex;
     justify-content: space-between;
@@ -41,23 +46,25 @@ const showMovements = ref(false);
       width: 50px;
     }
   }
+  &--container {
+    position: absolute;
+    width: 100%;
+  }
   &--resume {
     display: flex;
-    height: 100vh;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding-top: 100px;
+    height: 100vh;
   }
   &--moviments-container {
     position: absolute;
-    flex-direction: column;
     bottom: 0;
     width: 100%;
     background-color: white;
     box-shadow: 0 -8px 16px #e5e5e5;
     border-radius: 24px;
-    z-index: 1;
     &--header {
       display: flex;
       flex-direction: column;
@@ -78,12 +85,7 @@ const showMovements = ref(false);
   &--moviments-content {
     height: 75vh;
     width: 100%;
-    @media (min-width: 768px) {
-      height: 80vh;
-    }
-    @media (min-width: 992px) {
-      height: 65vh;
-    }
+
     &--title {
       color: #30a8bd;
       text-align: center;

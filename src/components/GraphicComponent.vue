@@ -45,12 +45,23 @@ const props = defineProps({
 });
 const { amounts } = toRefs(props);
 const amountToPixels = (amount) => {
-  const min = Math.min(...amounts.value);
-  const max = Math.max(...amounts.value);
+  const amountsArray = amounts.value;
+  if (amountsArray.length === 0) {
+    return 100;
+  }
+
+  const min = Math.min(...amountsArray);
+  const max = Math.max(...amountsArray);
   const amountAbs = amount + Math.abs(min);
   const minmax = Math.abs(max) + Math.abs(min);
+
+  if (minmax === 0) {
+    return 100;
+  }
+
   return 200 - ((amountAbs * 100) / minmax) * 2;
 };
+
 const zero = computed(() => {
   return amountToPixels(0);
 });
@@ -68,7 +79,7 @@ const pointer = ref(0);
 watch(pointer, (value) => {
   const index = Math.ceil(value / (300 / amounts.value.length));
   if (index < 0 || index > amounts.value.length) return;
-  emit("select", amounts.value[index - 1], index);
+  emit("select", amounts.value[index + 1], index);
 });
 const tap = ({ target, touches }) => {
   showPointer.value = true;
@@ -91,6 +102,7 @@ const clickEl = (e) => {
 span {
   text-align: center;
 }
+
 svg {
   width: 100%;
 }

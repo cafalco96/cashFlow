@@ -1,7 +1,9 @@
 <template>
   <main>
     <p>{{ visualLabel }}</p>
-    <h2 class="amount">{{ currencyAmount }}</h2>
+    <h2 class="amount" :class="{ discharge: isNegative, income: !isNegative }">
+      {{ currencyAmount }}
+    </h2>
     <div class="cash-flow-layout--resume--graphic">
       <slot name="graphic"></slot>
     </div>
@@ -43,6 +45,9 @@ export default {
     currencyAmount() {
       return currencyAmountFormat.format(this.visualAmount);
     },
+    isNegative() {
+      return this.totalAmount < 0;
+    },
   },
 };
 </script>
@@ -50,5 +55,8 @@ export default {
 .amount {
   font-size: 50px;
   color: #30bd9c;
+}
+.cash-flow-layout--resume--button-action {
+  margin-bottom: 150px;
 }
 </style>

@@ -25,7 +25,7 @@
     <template #movimentsComponent>
       <MovimentsComponent
         :movements="movements"
-        @delete-movement="deleteMoviment"
+        @delete-movement="deleteMovement"
       ></MovimentsComponent>
     </template>
   </LayoutComponent>
@@ -55,19 +55,20 @@ export default {
   },
   computed: {
     amounts() {
+      const today = new Date();
+      const oldDate = today.setDate(today.getDate() - 30);
+
       const lastDays = this.movements
-        .filter((m) => {
-          const today = new Date();
-          const oldDate = today.setDate(today.getDate() - 30);
-          return m.time > oldDate;
-        })
+        .filter((m) => m.time > oldDate)
         .map((m) => m.amount);
-      return lastDays.map((m, i) => {
-        const lastMovements = lastDays.slice(0, i);
-        return lastMovements.reduce((suma, movement) => {
-          return suma + movement;
-        }, 0);
+
+      let sum = 0;
+      const accumulatedAmounts = lastDays.map((amount) => {
+        sum += amount;
+        return sum;
       });
+
+      return accumulatedAmounts;
     },
     totalAmount() {
       return this.movements.reduce((suma, m) => {
@@ -89,7 +90,7 @@ export default {
       this.movements.push(movement);
       this.save();
     },
-    deleteMoviment(id) {
+    deleteMovement(id) {
       const index = this.movements.findIndex((m) => m.id === id);
       this.movements.splice(index, 1);
       this.save();
@@ -97,15 +98,19 @@ export default {
     save() {
       localStorage.setItem("movements", JSON.stringify(this.movements));
     },
-    select(el, index) {
+    select(el, id) {
       this.amount = el;
-      if (index < 0 || index > this.amounts.length) return;
-      const dateString = this.movements[index].time.toLocaleString("en-US", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+      this.movements.forEach((movement, index) => {
+        if (index === id) {
+          const time = movement.time;
+          const dateString = time.toLocaleString("en-US", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          });
+          this.label = dateString;
+        }
       });
-      this.label = dateString;
     },
   },
 };

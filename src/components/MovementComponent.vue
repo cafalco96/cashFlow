@@ -43,9 +43,9 @@ const currencyAmount = computed(() =>
 const emit = defineEmits(["deleteMovement"]);
 const isDischarge = computed(() => amount.value < 0);
 </script>
-<style scoped>
+<style lang="scss">
 .income {
-  color: green;
+  color: #30bd9c;
 }
 .discharge {
   color: red;

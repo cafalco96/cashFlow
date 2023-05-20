@@ -2,7 +2,7 @@
   <div class="splashscreen">
     <img src="@/assets/money-svgrepo-com.svg" alt="logo" />
     <h1>Welcome to CashFlow</h1>
-    <span>by CarlosFalconi</span>
+    <span>by Carlos Falconi</span>
   </div>
 </template>
 <style lang="scss">
