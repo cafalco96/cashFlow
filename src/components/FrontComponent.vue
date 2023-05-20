@@ -58,5 +58,8 @@ export default {
 }
 .cash-flow-layout--resume--button-action {
   margin-bottom: 150px;
+  @media (min-width: 768px) {
+    margin-bottom: 250px;
+  }
 }
 </style>

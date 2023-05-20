@@ -57,6 +57,9 @@ const showMovements = ref(false);
     text-align: center;
     padding-top: 100px;
     height: 100vh;
+    @media (min-width: 768px) {
+      padding-top: 200px;
+    }
   }
   &--moviments-container {
     position: absolute;
