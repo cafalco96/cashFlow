@@ -60,6 +60,9 @@ const showMovements = ref(false);
     @media (min-width: 768px) {
       padding-top: 200px;
     }
+    @media (min-height: 1px) and (max-height: 539px) {
+      padding-top: 400px;
+    }
   }
   &--moviments-container {
     position: absolute;

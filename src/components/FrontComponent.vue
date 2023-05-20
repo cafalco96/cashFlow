@@ -61,5 +61,8 @@ export default {
   @media (min-width: 768px) {
     margin-bottom: 250px;
   }
+  @media (min-height: 1px) and (max-height: 539px) {
+    margin-bottom: 450px;
+  }
 }
 </style>
