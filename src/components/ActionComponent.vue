@@ -36,7 +36,7 @@
             />
           </div>
           <div class="cash-flow-layout--input-text__two-columns--radio">
-            <label for="discharge">Discharge</label>
+            <label for="discharge">Spent</label>
             <input
               type="radio"
               name="movement-type"
