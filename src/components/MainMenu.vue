@@ -26,6 +26,7 @@
       <MovimentsComponent
         :movements="movements"
         @delete-movement="deleteMovement"
+        @edit-movement="editMovement"
       ></MovimentsComponent>
     </template>
   </LayoutComponent>
@@ -94,6 +95,12 @@ export default {
       const index = this.movements.findIndex((m) => m.id === id);
       this.movements.splice(index, 1);
       this.save();
+    },
+    editMovement(id, movement) {
+      const index = this.movements.findIndex((m) => m.id === id);
+      this.movements.splice(index, 1, movement);
+      this.save();
+      console.log(this.movements[index]);
     },
     save() {
       localStorage.setItem("movements", JSON.stringify(this.movements));

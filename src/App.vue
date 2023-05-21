@@ -19,7 +19,7 @@ export default {
         new Promise((resolve) => {
           setTimeout(() => {
             resolve(import("./components/MainMenu.vue"));
-          }, 2500);
+          }, 850);
         })
     ),
     SplashScreen,

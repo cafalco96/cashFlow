@@ -14,6 +14,7 @@
       :id="movement.id"
       :time="movement.time"
       @delete-movement="remove"
+      @edit-movement="edit"
     >
     </MovementComponent>
   </div>
@@ -27,9 +28,12 @@ const props = defineProps({
     default: () => [],
   },
 });
-const emit = defineEmits(["delete-movement"]);
+const emit = defineEmits(["delete-movement", "edit-movement"]);
 const { movements } = toRefs(props);
 const remove = (id) => {
   emit("delete-movement", id);
+};
+const edit = (id, movement) => {
+  emit("edit-movement", id, movement);
 };
 </script>
