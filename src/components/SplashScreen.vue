@@ -1,7 +1,7 @@
 <template>
   <div class="splashscreen">
     <img src="@/assets/money-svgrepo-com.svg" alt="logo" />
-    <h1>Please wait to CashFlow</h1>
+    <h1>Welcome to CashFlow</h1>
     <span>by Carlos Falconi</span>
   </div>
 </template>
